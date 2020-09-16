@@ -1,0 +1,42 @@
+version: '3'
+
+volumes:
+  local_postgres_data: {}
+  local_postgres_data_backups: {}
+  local_traefik: {}
+  local_mongodb_data: {}
+
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    env_file:
+      - ./.envs/.mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - local_mongodb_data:/data/db
+      - ./mongo/:/docker-entrypoint-initdb.d/
+  
+  # elasticsearch:
+  #   container_name: elasticsearch
+  #   image: elasticsearch:7.5.0
+  #   environment:
+  #     - bootstrap.memory_lock=true
+  #     - discovery.type=single-node
+  #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #   ulimits:
+  #     memlock:
+  #       soft: -1
+  #       hard: -1
+  #   ports:
+  #     - 9200:9200
+  #     - 9300:9300
+  #   stdin_open: true
+  #   tty: true
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-size: "10m"
+  #       max-file: "50"

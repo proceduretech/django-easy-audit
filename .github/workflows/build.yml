@@ -33,5 +33,5 @@ jobs:
         python -m pip install -e .
     - name: Run Tests
       run: |
-        cd ./easyaudit/tests
+        cd ./audit/tests
         python -m manage test

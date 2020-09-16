@@ -19,7 +19,7 @@ install:
     - pip install -e .
 
 before_script:
-    - cd easyaudit/tests
+    - cd audit/tests
 
 script:
     - python manage.py test
